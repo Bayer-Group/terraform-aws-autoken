@@ -1,0 +1,21 @@
+name: devops-sonarqube-autoken
+description: Get short lived credentials for SonarQube
+runs:
+  using: node20
+  main: dist/action-token.js
+  post: dist/action-cleanup.js
+inputs:
+  platform:
+    description: The platform to request a token for
+    required: yes
+    default: "sonarqube"
+  project:
+    description: The technical name of the SonarQube project
+    required: false
+    default: ""
+  sonarUrl:
+    description: The URL of SonarQube
+    required: false
+  apiUrl:
+    description: The URL of the API that vends credentials
+    required: false

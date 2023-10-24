@@ -1,0 +1,11 @@
+.terraform/
+
+.terraform.*
+terraform.tfstate*
+
+builds/
+
+node_modules/
+coverage/
+
+funcOld

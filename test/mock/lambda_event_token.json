@@ -1,0 +1,19 @@
+{
+    "headers": {
+     "project": "bayer-group_devops-sonarqube-autoken-test",
+     "type": "token",
+     "sonarUrl": "https://sonar.cloud.bayer.com"
+
+    },
+    "requestContext": {
+        "authorizer": {
+             "jwt": {
+                "claims" : {
+                    "repository_owner": "bayer-group",                    
+                    "repository": "bayer-group/devops-sonarqube-autoken-test",
+                    "run_id": "1337"
+                }
+            }
+        }
+    }
+}
