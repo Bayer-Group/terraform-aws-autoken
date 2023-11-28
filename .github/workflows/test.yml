@@ -22,7 +22,8 @@ jobs:
         with:
           node-version: '20'
 
-      - run: cd functions
-      - run: npm ci
-      - run: npm run build
-      - run: npm run test:ci
+      - run: | 
+          cd functions
+          npm ci
+          npm run build
+          npm run test:ci
