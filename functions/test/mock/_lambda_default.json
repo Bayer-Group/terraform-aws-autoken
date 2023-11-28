@@ -1,0 +1,20 @@
+{
+    "headers": {
+        "platform": "artifactory",
+        "type": "token",
+        "project": "bayer-group_devops-sonarqube-autoken-test",
+        "sonarUrl": "https://sonar.cloud.bayer.com",
+        "token": ""
+    },
+    "requestContext": {
+        "authorizer": {
+             "jwt": {
+                "claims" : {
+                    "repository_owner": "bayer-group",                    
+                    "repository": "bayer-group/devops-sonarqube-autoken-test7",
+                    "run_id": "1337"
+                }
+            }
+        }
+    }
+}

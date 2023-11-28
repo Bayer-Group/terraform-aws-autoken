@@ -1,0 +1,6 @@
+{
+    "code": 401,
+    "message": {
+        "text": "Only calls from whitelisted organizations are allowed."
+    }   
+}
