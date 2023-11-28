@@ -4,7 +4,7 @@ If you believe you have found a security vulnerability, please report it to us t
 
 Please do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.
 
-Instead, please send report use the private vulnerability disclosure on GitHub.
+Instead, please send report use the [private vulnerability disclosure](https://github.com/Bayer-Group/autoken/security/advisories/new) on GitHub.
 
 Please include as much of the information listed below as you can to help us better understand and resolve the issue:
 
