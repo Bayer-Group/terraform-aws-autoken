@@ -27,14 +27,14 @@ See the [Terraform Module docs](docs/terraform.md).
 
 ## Usage
 
-The GitHub Action `bayer-group/autoken` can be used within a pipeline. Depending on the platform it brokeres credentials for, it grants access based on metadata and specific configuration.
+The GitHub Action `bayer-group/terraform-aws-autoken` can be used within a pipeline. Depending on the platform it brokeres credentials for, it grants access based on metadata and specific configuration.
 
 ### SonarQube
 
 You GitHub Actions pipeline could use the following steps for integrating with SonarQube:
 
 ```
-  - uses: bayer-group/autoken@v1
+  - uses: bayer-group/terraform-aws-autoken@v1
     with:
       platform: 'sonarqube'
   - uses: sonarsource/sonarqube-scan-action@v2
@@ -49,7 +49,7 @@ Autoken only grant access via a token if the according SonarQube project specifi
 To integrate with Artifactory, you could use a GitHub Actions pipeline with the following steps. `ARTIFACTORY_REGISTRY` still has to be provided by the developer, as it varies based on the repository you are looking to connect to.
 
 ```
-  - uses: bayer-group/autoken@v1
+  - uses: bayer-group/terraform-aws-autoken@v1
     with:
       platform: 'artifactory'
   - run: echo $ARTIFACTORY_TOKEN | docker login https://${ARTIFACTORY_REGISTRY} --username ${ARTIFACTORY_USER} --password-stdin
@@ -58,7 +58,7 @@ To integrate with Artifactory, you could use a GitHub Actions pipeline with the 
       docker push ${TAG}
 ```
 
-For every GitHub Repository, `bayer-group/autoken` maintains a transient bot user in Artifactory. Upon calling the action, autoken retrieves short-lived credentials for this transient user. Developers can grant this bot user permissions within Artifactory as they like and the credentials granted by Autoken will reflect those.
+For every GitHub Repository, `bayer-group/terraform-aws-autoken` maintains a transient bot user in Artifactory. Upon calling the action, autoken retrieves short-lived credentials for this transient user. Developers can grant this bot user permissions within Artifactory as they like and the credentials granted by Autoken will reflect those.
 
 ## Architecture
 
