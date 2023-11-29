@@ -44,7 +44,7 @@ The `bayer-group/autoken` action retrieves a temporary token for SonarQube and t
 
 Autoken only grant access via a token if the according SonarQube project specifies the requesting GitHub repository as its connected repo.
 
-## Artifactory
+### Artifactory
 
 To integrate with Artifactory, you could use a GitHub Actions pipeline with the following steps. `ARTIFACTORY_REGISTRY` still has to be provided by the developer, as it varies based on the repository you are looking to connect to.
 

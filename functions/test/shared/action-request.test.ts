@@ -1,4 +1,7 @@
-import { callTokenApi } from "../../src/shared/action-request";
+import { 
+  callTokenApi, 
+  detectSonarQubeProject 
+} from "../../src/shared/action-request";
 
 import * as core from "@actions/core";
 import axios from "axios";
@@ -42,5 +45,14 @@ describe('callTokenApi', () => {
     });
 
     expect(response).toEqual({ token: "test123" });
+  });
+});
+
+describe('detectSonarQubeProject', () => {
+  test('default', async () => {
+    process.env.GITHUB_REPOSITORY = "bayer-group/devops-sonarqube-autoken";
+    
+    const response = detectSonarQubeProject();
+    expect(response).toEqual("bayer-group_devops-sonarqube-autoken");
   });
 });

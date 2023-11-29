@@ -22,7 +22,7 @@ export async function handleSonarQube(event: TokenSonarQubeEvent, adminToken: st
   const { type, project } = event.headers;
   const { repository, run_id } = event.requestContext.authorizer.jwt.claims;
   
-  if(checkProjectBindingMatches(adminToken, project, repository)) {
+  if(await checkProjectBindingMatches(adminToken, project, repository)) {
     const botName = project + "_bot_autoken"    
     await createBotIfNeeded(botName, adminToken, project);
 
@@ -42,6 +42,7 @@ export async function handleSonarQube(event: TokenSonarQubeEvent, adminToken: st
   } else {
     response = buildResponse("You are not authorized for this project", 401);
   }
+  console.log(response)
   return response
 }
 
@@ -50,7 +51,7 @@ async function checkProjectBindingMatches (adminToken: string, project: string, 
   const binding = await self.callSonarQube('alm_settings/get_binding', 'get', adminToken, { 
     project: project 
   })
-  return binding.repository === repository
+  return binding.repository == repository
 }
 
 async function createBotIfNeeded(botName: string, adminToken: string, project: string) {

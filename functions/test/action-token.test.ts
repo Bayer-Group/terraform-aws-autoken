@@ -1,5 +1,5 @@
 delete process.env.CI
-import { run, detectProject } from "../src/action-token";
+import { run } from "../src/action-token";
 
 import * as core from "@actions/core";
 import * as actionRequest from "../src/shared/action-request";
@@ -76,14 +76,5 @@ describe('run', () => {
     expect(setFailed).toHaveBeenCalledTimes(1);
 
     expect(setFailed.mock.calls[0][0]).toBe("Error 123");
-  });
-});
-
-describe('detectProject', () => {
-  test('default', async () => {
-    process.env.GITHUB_REPOSITORY = "bayer-group/devops-sonarqube-autoken";
-    
-    const response = detectProject();
-    expect(response).toEqual("bayer-group_devops-sonarqube-autoken");
   });
 });
