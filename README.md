@@ -7,6 +7,8 @@ Want to set up user agnostic automation? Do you want to comply with credential r
 
 ## Deploy Terraform
 
+> :warning: When running Autoken as an admin, make sure to familiarize yourself with the [Secure Operations for Autoken](docs/secure-operations.md) information.
+
 Use the Terraform module to deploy Autoken to your AWS account. Provide your GitHub organization and Artifactory / SonarQube information as needed.
 
 ```
@@ -62,7 +64,7 @@ For every GitHub Repository, `bayer-group/terraform-aws-autoken` maintains a tra
 
 ## Architecture
 
-See [the architecture documentation](architecture.md) for further information on how Autoken is set up.
+See [the architecture documentation](docs/architecture.md) for further information on how Autoken is set up.
 
 ## Contributing
 
