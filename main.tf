@@ -1,6 +1,6 @@
 module "lambda" {
   source  = "terraform-aws-modules/lambda/aws"
-  version = "6.4.0"
+  version = "7.4.0"
 
   function_name = "${local.name}"
   runtime       = "nodejs20.x"
@@ -39,7 +39,7 @@ module "lambda" {
 
 module "api_gateway" {
   source  = "terraform-aws-modules/apigateway-v2/aws"
-  version = "2.2.2"
+  version = "4.0.0"
 
   name          = "${local.name}"
   protocol_type = "HTTP"
@@ -50,23 +50,24 @@ module "api_gateway" {
 
 
   default_stage_access_log_destination_arn = aws_cloudwatch_log_group.logs.arn
-  default_stage_access_log_format = replace(<<EOT
-  { 
-    "requestId":"$context.requestId", 
-    "ip": "$context.identity.sourceIp", 
-    "requestTime":"$context.requestTime", 
-    "httpMethod":"$context.httpMethod",
-    "routeKey":"$context.routeKey", 
-    "status":"$context.status",
-    "protocol":"$context.protocol", 
-    "responseLength":"$context.responseLength", 
-    "error":"$context.authorizer.error", 
-    "aud":"$context.authorizer.claims.aud", 
-    "sub":"$context.authorizer.claims.sub", 
-    "job_workflow_ref":"$context.authorizer.claims.job_workflow_ref" 
-}
-EOT
-  , "\n", " ")
+
+#  default_stage_access_log_format = replace(<<EOT
+#  { 
+#    "requestId":"$context.requestId", 
+#    "ip": "$context.identity.sourceIp", 
+#    "requestTime":"$context.requestTime", 
+#    "httpMethod":"$context.httpMethod",
+#    "routeKey":"$context.routeKey", 
+#    "status":"$context.status",
+#    "protocol":"$context.protocol", 
+#    "responseLength":"$context.responseLength", 
+#    "error":"$context.authorizer.error", 
+#    "aud":"$context.authorizer.claims.aud", 
+#    "sub":"$context.authorizer.claims.sub", 
+#    "job_workflow_ref":"$context.authorizer.claims.job_workflow_ref" 
+#}
+#EOT
+#  , "\n", " ")
 
   default_route_settings = {
     detailed_metrics_enabled = true
