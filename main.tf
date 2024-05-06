@@ -119,6 +119,6 @@ resource "random_pet" "this" {
 }
 
 locals {
-  postfix = var.postfix ? "-${var.postfix}" : "-${random_pet.this.id}"
+  postfix = var.postfix != "" ? "-${var.postfix}" : "-${random_pet.this.id}"
   name    = "${var.prefix}autoken${local.postfix}"
 }
