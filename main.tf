@@ -92,7 +92,7 @@ EOT
     "github" = {
       authorizer_type  = "JWT"
       identity_sources = "$request.header.Authorization"
-      name             = "github"-auth
+      name             = "github-auth"
       audience         = ["autoken"]
       issuer           = "https://token.actions.githubusercontent.com"
     }
