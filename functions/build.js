@@ -11,8 +11,8 @@ require('esbuild').build({
     platform: 'node',
     sourcemap: true,
     legalComments: 'external',
-    external: [
-        'aws-sdk'
-    ],
+    //external: [
+    //    'aws-sdk'
+    //],
     outdir: 'dist'
 })
