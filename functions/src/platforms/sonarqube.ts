@@ -75,12 +75,18 @@ async function createBotIfNeeded(botName: string, adminToken: string, project: s
 }
 
 export async function callSonarQube(path:string, method:Method, adminToken: string, data: object) {
-  const response = await axios({
+  let response;
+  try {
+    response = await axios({
       method: method,
-      url: SONAR_API_URL + path + "?" + Object.entries(data).map(e => e.join('=')).join('&'),
+      url: SONAR_API_URL + "/" + path + "?" + Object.entries(data).map(e => e.join('=')).join('&'),
       responseType: 'json',
       auth: {username: adminToken, password: ""}
-  })
-  Logger.info(path, response.data)
-  return response.data;
+    })
+  } catch(e) {
+    console.log("Request: callSonarQube")
+  }
+  const result = response && response.status < 400 ? response.data : ""
+  Logger.info(path, result)
+  return result;
 }
