@@ -93,7 +93,7 @@ module "api_gateway" {
     "github" = {
       authorizer_type  = "JWT"
       identity_sources = "$request.header.Authorization"
-      name             = "github-auth"
+      name             = "github"
       audience         = ["autoken"]
       issuer           = "https://token.actions.githubusercontent.com"
     }
