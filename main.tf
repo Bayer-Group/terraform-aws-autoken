@@ -105,7 +105,7 @@ resource "aws_cloudwatch_log_group" "logs" {
 }
 
 resource "aws_secretsmanager_secret" "adminTokens" {
-  name = "${local.name}"
+  name = "autoken-admintokens"
 }
 resource "aws_secretsmanager_secret_version" "admintokens" {
   secret_id     = aws_secretsmanager_secret.adminTokens.id
