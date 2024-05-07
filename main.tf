@@ -85,6 +85,7 @@ module "api_gateway" {
     "$default" = {
       lambda_arn             = module.lambda.lambda_function_arn
       payload_format_version = "2.0"
+      authorization_type     = "JWT"
       authorizer_key         = "github"
     }
   }
