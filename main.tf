@@ -3,7 +3,7 @@ module "lambda" {
   version = "6.4.0"
 
   function_name = "${local.name}"
-  runtime       = "nodejs22.x"
+  runtime       = var.lambda_runtime
   handler       = "lambda.handler"
   source_path   = [
     "${path.module}/functions/dist/lambda.js",

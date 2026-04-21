@@ -66,3 +66,9 @@ variable "api_url_artifactory" {
   description = "API URL for Artifactory"
   type        = string
 }
+
+variable "lambda_runtime" {
+  description = "Runtime version of Lambda"
+  default = "nodejs22.x"
+  type = string
+}
