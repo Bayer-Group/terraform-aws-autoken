@@ -1,7 +1,7 @@
 name: devops-sonarqube-autoken
 description: Get short lived credentials for SonarQube
 runs:
-  using: node20
+  using: node24
   main: functions/dist/action-token.js
   post: functions/dist/action-cleanup.js
 inputs:
