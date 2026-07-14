@@ -46,7 +46,7 @@ export const run = async () => {
             core.setFailed("Could not get credentials.");
         }
     } catch(e) {
-        core.setFailed(e);
+        core.setFailed(e instanceof Error ? e.message : String(e));
     }    
 };
 

@@ -15,6 +15,7 @@ describe('callTokenApi', () => {
   beforeEach(() => {
     getInput.mockClear();
     getIDToken.mockClear();
+    mockedAxios.mockClear();
   })
 
   test('default', async () => {
@@ -45,6 +46,25 @@ describe('callTokenApi', () => {
     });
 
     expect(response).toEqual({ token: "test123" });
+  });
+
+  test('rejects invalid apiUrl', async () => {
+    getInput.mockImplementationOnce(() => "");
+
+    await expect(callTokenApi({ platform: "sonarqube" })).rejects.toThrow(/Invalid apiUrl/);
+    expect(mockedAxios).not.toHaveBeenCalled();
+  });
+
+  test('surfaces axios AggregateError details', async () => {
+    getInput.mockImplementationOnce(() => "https://api.example.com");
+    const aggregate = Object.assign(new Error("AggregateError"), {
+      errors: [new Error("connect ECONNREFUSED 127.0.0.1:443")],
+    });
+    mockedAxios.mockRejectedValue(aggregate);
+
+    await expect(callTokenApi({ platform: "sonarqube" })).rejects.toThrow(
+      /Failed to call Autoken API at "https:\/\/api.example.com": connect ECONNREFUSED/
+    );
   });
 });
 

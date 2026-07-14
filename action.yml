@@ -18,4 +18,4 @@ inputs:
     required: false
   apiUrl:
     description: The URL of the API that vends credentials
-    required: false
+    required: true

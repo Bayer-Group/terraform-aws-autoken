@@ -64,7 +64,7 @@ describe('run', () => {
   });
 
   test('error', async () => {
-    callTokenApi.mockRejectedValue("Error 123");    
+    callTokenApi.mockRejectedValue(new Error("Error 123"));    
     getInput
       .mockReturnValueOnce("sonarqube")
       .mockReturnValueOnce("devops-autoken-test")
