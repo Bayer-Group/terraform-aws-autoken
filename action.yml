@@ -17,5 +17,6 @@ inputs:
     description: The URL of SonarQube
     required: false
   apiUrl:
-    description: The URL of the API that vends credentials
+    description: Autoken API Gateway endpoint_url (or set AUTOKEN_API_URL)
     required: false
+    default: ""

@@ -39,10 +39,13 @@ You GitHub Actions pipeline could use the following steps for integrating with S
   - uses: bayer-group/terraform-aws-autoken@v1
     with:
       platform: 'sonarqube'
+      apiUrl: ${{ vars.AUTOKEN_API_URL }}
   - uses: sonarsource/sonarqube-scan-action@v2
 ```
 
 The `bayer-group/autoken` action retrieves a temporary token for SonarQube and the scan action `sonarsource/sonarqube-scan-action` is able to use this token directly to perform and report the scan.
+
+Set `apiUrl` to the Terraform `endpoint_url` output (or use an org/repo variable `AUTOKEN_API_URL`). The workflow also needs `permissions: id-token: write` so GitHub can issue the OIDC JWT.
 
 Autoken only grant access via a token if the according SonarQube project specifies the requesting GitHub repository as its connected repo.
 
@@ -54,6 +57,7 @@ To integrate with Artifactory, you could use a GitHub Actions pipeline with the 
   - uses: bayer-group/terraform-aws-autoken@v1
     with:
       platform: 'artifactory'
+      apiUrl: ${{ vars.AUTOKEN_API_URL }}
   - run: echo $ARTIFACTORY_TOKEN | docker login https://${ARTIFACTORY_REGISTRY} --username ${ARTIFACTORY_USER} --password-stdin
   - run: |
       docker build . --tag ${TAG}

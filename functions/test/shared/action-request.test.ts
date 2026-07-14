@@ -48,8 +48,35 @@ describe('callTokenApi', () => {
     expect(response).toEqual({ token: "test123" });
   });
 
-  test('rejects invalid apiUrl', async () => {
+  test('rejects missing apiUrl', async () => {
     getInput.mockImplementationOnce(() => "");
+    delete process.env.AUTOKEN_API_URL;
+
+    await expect(callTokenApi({ platform: "sonarqube" })).rejects.toThrow(/Missing apiUrl/);
+    expect(mockedAxios).not.toHaveBeenCalled();
+  });
+
+  test('uses AUTOKEN_API_URL when input is empty', async () => {
+    getInput.mockImplementationOnce(() => "");
+    process.env.AUTOKEN_API_URL = "https://api.from-env.example.com";
+    mockedAxios.mockResolvedValue({
+      status: 200,
+      statusText: "OK",
+      config: {},
+      headers: {},
+      data: { token: "test123" }
+    });
+
+    await callTokenApi({ platform: "sonarqube" });
+
+    expect(mockedAxios.mock.calls[0][0]).toMatchObject({
+      url: "https://api.from-env.example.com",
+    });
+    delete process.env.AUTOKEN_API_URL;
+  });
+
+  test('rejects invalid apiUrl', async () => {
+    getInput.mockImplementationOnce(() => "not-a-url");
 
     await expect(callTokenApi({ platform: "sonarqube" })).rejects.toThrow(/Invalid apiUrl/);
     expect(mockedAxios).not.toHaveBeenCalled();

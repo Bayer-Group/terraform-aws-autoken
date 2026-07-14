@@ -39,7 +39,12 @@ const formatRequestError = (error: unknown, apiUrl: string): Error => {
 // returns token or confirms revocation
 export const callTokenApi = async (params: object) => {
 
-    const apiUrl = core.getInput("apiUrl", { required: true });
+    const apiUrl = core.getInput("apiUrl") || process.env.AUTOKEN_API_URL || "";
+    if (!apiUrl) {
+        throw new Error(
+            'Missing apiUrl. Pass it to the action (`with: apiUrl: ...`) or set AUTOKEN_API_URL to the Autoken Terraform output endpoint_url.'
+        );
+    }
     if (!/^https?:\/\//i.test(apiUrl)) {
         throw new Error(`Invalid apiUrl "${apiUrl}". Provide the Autoken API Gateway endpoint_url (https://...).`);
     }
